@@ -38,7 +38,7 @@ body{
 } */
 
 
-div{
+/* div{
     display:flex;
     justify-content: space-around;
     gap: 20px;
@@ -62,4 +62,24 @@ p{
     min-width: 200px;
 }
     
+} */
+body{
+    background-color: rgb(70, 37, 37);
+    color: rgb(1, 6, 11);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+button{
+    width: 15vw;
+    height: 20vh;
+    font-size:3rem;
+    
+}
+
+.conteneur{
+    
+    margin: auto;
 }

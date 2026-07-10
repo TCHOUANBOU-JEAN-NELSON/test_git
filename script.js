@@ -4,11 +4,19 @@ let userChoice=""
 let machineScore=0
 let machineChoice=""
 
-function getHumanChoice()
-{
-    userChoice=(prompt("entrer votre votre choix -rock  -scissor  -paper (default='rock')","rock")).toLowerCase()
-    return userChoice
-}
+let choix=document.querySelector(".conteneur")
+let messageJoueur=document.querySelector(".messageJoueur")
+choix=addEventListener("click",function getHumanChoice(e)
+    {
+        if(e.currentTarget.tagName==="BUTTON")
+        {
+            userChoice=e.currentTarget.value
+            messageJoueur.insertAdjacentElement("afterbegin",`<p>${userChoice}</p>`)
+        }
+        play()
+    }
+)
+
 
 function getMachineChoice()
 {
@@ -24,7 +32,7 @@ function getMachineChoice()
     return machineChoice
 }
 
-function result(userChoice=getHumanChoice(),machineChoice=getMachineChoice())
+function result(machineChoice=getMachineChoice())
 {
     if(userChoice===machineChoice)
         console.log("match null!")
@@ -66,18 +74,17 @@ function play()
         result()
     }
     if(userScore==5)
-        console.log("vous avez gagnee "+userScore)
+        messageJoueur.insertAdjacentElement("afterbegin",`<p>🎊vous avez gagnee🎊</p>`)
     else
-        console.log("defaite. Essayer une prochaine fois "+machineScore)
-
+        messageJoueur.insertAdjacentElement("afterbegin",`<p>vous avez perdu 😂😂😂😂😂</p>`)
     let continuer=confirm("voulez-vous continuer?")
     if(continuer)
        {
-         userScore=0
+        userScore=0
         machineScore=0
-        play()
+        messageJoueur.innerHTML=""
        }
 }
 
-play()
+
 
