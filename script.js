@@ -4,16 +4,18 @@ let userChoice=""
 let machineScore=0
 let machineChoice=""
 
+let continuer
+
 let choix=document.querySelector(".conteneur")
 let messageJoueur=document.querySelector(".messageJoueur")
-choix=addEventListener("click",function getHumanChoice(e)
+choix.addEventListener("click",function getHumanChoice(e)
     {
-        if(e.currentTarget.tagName==="BUTTON")
+        if(e.target.tagName==="BUTTON")
         {
-            userChoice=e.currentTarget.value
-            messageJoueur.insertAdjacentElement("afterbegin",`<p>${userChoice}</p>`)
+            userChoice=e.target.value
         }
         play()
+        messageJoueur.insertAdjacentHTML("afterbegin",`<p>${userChoice} vs ${machineChoice}</p>`)
     }
 )
 
@@ -70,14 +72,19 @@ function result(machineChoice=getMachineChoice())
 
 function play()
 {
-    while (userScore<5 && machineScore<5) {
+    if (userScore<5 && machineScore<5) {
         result()
     }
     if(userScore==5)
-        messageJoueur.insertAdjacentElement("afterbegin",`<p>🎊vous avez gagnee🎊</p>`)
-    else
-        messageJoueur.insertAdjacentElement("afterbegin",`<p>vous avez perdu 😂😂😂😂😂</p>`)
-    let continuer=confirm("voulez-vous continuer?")
+       {
+         messageJoueur.insertAdjacentHTML("beforebegin",`<p>🎊vous avez gagnee🎊  ${userScore} : ${machineScore}</p>`)
+         continuer=confirm("voulez-vous continuer?")
+       }
+    else if(machineScore==5)
+        {
+            messageJoueur.insertAdjacentHTML("beforebegin",`<p>vous avez perdu 😂😂😂😂😂   ${machineScore} : ${userScore}</p>`)
+            continuer=confirm("voulez-vous continuer?")
+        }
     if(continuer)
        {
         userScore=0
